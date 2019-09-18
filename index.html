@@ -5,14 +5,20 @@
   </head>
   <body>
     <section>
-      <h1 id="temperature"></h1>
+      <h1 id="temperature">20</h1>
       <p>
-        <button id="temperature-up">+</button>
-        <button id="temperature-down">-</button>
-        <button id="temperature-reset">reset</button>
-        power saving mode is <span id="power-saving-status">on</span>
-        <button id="powersaving-switch">PSM switch</button>
-        Energy consumption is <span id="energy-usage">test</span>
+        <div class="gap-20">
+          <button id="temperature-up">+</button>
+          <button id="temperature-down">-</button>
+          <button id="temperature-reset">reset</button>
+        </div>
+        <div class="gap-20">
+          <button id="powersaving-switch">PSM switch</button>
+          Power saving mode is <span id="power-saving-status">on</span>
+        </div>
+        <div class="gap-20">
+          Energy consumption is <span id="energy-usage">medium-usage</span>
+        </div>
         <!-- <button id="powersaving-off">PSM off</button> -->
       </p>
     </section>
@@ -21,43 +27,7 @@
 
 <script src="src/thermostat.js"></script>
 <script src="jquery.js"></script>
-<script>
-$( document ).ready(function() {
-  thermostat = new Thermostat();
-  update = function() {
-    thermostat.updateUsage();
-    $("#temperature").text(t.temperature);
-    $("#energy-usage").text(t.energyUsage);
-  };
-
-  $("#temperature").text(thermostat.temperature);
-  $("#energy-usage").text(thermostat.energyUsage);
-
-  $( "#temperature-up" ).on('click', function() {
-      thermostat.up();
-      update();
-  });
-  $( "#temperature-down" ).on('click', function() {
-      thermostat.down();
-      update();
-  });
-  $( "#temperature-reset" ).on('click', function() {
-      thermostat.reset();
-      update();
-  });
-  $( "#powersaving-switch" ).on('click', function() {
-      thermostat.powerSavingSwitch();
-      $("#power-saving-status").text(t.powerSaving);
-  });
-
-  $('#current-city').change(function() {
-    var id = $('#current-city').val();
-    $.get('http://api.openweathermap.org/data/2.5/weather?id=' + id + '&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric', function(data) {
-      $('#current-temperature').text(data.main.temp);
-    })
-  })
-})
-</script>
+<script src="src/interface.js"></script>
 
 <section>
   <h1>Current temperature: <span id="current-temperature">20</span></h1>
