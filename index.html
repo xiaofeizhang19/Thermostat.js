@@ -29,23 +29,42 @@ $( document ).ready(function() {
     $("#temperature").text(t.temperature);
     $("#energy-usage").text(t.energyUsage);
   };
+
   $("#temperature").text(t.temperature);
   $("#energy-usage").text(t.energyUsage);
-    $( "#temperature-up" ).on('click', function() {
-        t.up();
-        update()
-    });
-    $( "#temperature-down" ).on('click', function() {
-        t.down();
-        update()
-    });
-    $( "#temperature-reset" ).on('click', function() {
-        t.reset();
-        update()
-    });
-    $( "#powersaving-switch" ).on('click', function() {
-        t.powerSavingSwitch();
-        $("#power-saving-status").text(t.powerSaving);
-    });
-});
+
+  $( "#temperature-up" ).on('click', function() {
+      t.up();
+      update();
+  });
+  $( "#temperature-down" ).on('click', function() {
+      t.down();
+      update();
+  });
+  $( "#temperature-reset" ).on('click', function() {
+      t.reset();
+      update();
+  });
+  $( "#powersaving-switch" ).on('click', function() {
+      t.powerSavingSwitch();
+      $("#power-saving-status").text(t.powerSaving);
+  });
+
+  $('#current-city').change(function() {
+    var id = $('#current-city').val();
+    $.get('http://api.openweathermap.org/data/2.5/weather?id=' + id + '&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric', function(data) {
+      $('#current-temperature').text(data.main.temp);
+    })
+  })
+})
 </script>
+
+<section>
+  <h1>Current temperature: <span id="current-temperature">20</span></h1>
+  <select id="current-city">
+    <option value="2643741">London</option>
+    <option value="5128638">New York</option>
+    <option value="2988506">Paris</option>
+    <option value="1850147">Tokyo</option>
+  </select>
+</section>
