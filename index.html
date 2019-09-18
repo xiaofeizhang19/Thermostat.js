@@ -12,7 +12,7 @@
         <button id="temperature-reset">reset</button>
         power saving mode is <span id="power-saving-status">true</span>
         <button id="powersaving-switch">PSM switch</button>
-        Energy consumption is <span id="energy-usage">medium-usage</span>
+        Energy consumption is <span id="energy-usage">test</span>
         <!-- <button id="powersaving-off">PSM off</button> -->
       </p>
     </section>
@@ -24,25 +24,24 @@
 <script>
 $( document ).ready(function() {
   t = new Thermostat();
+  update = function() {
+    t.updateUsage();
+    $("#temperature").text(t.temperature);
+    $("#energy-usage").text(t.energyUsage);
+  };
   $("#temperature").text(t.temperature);
   $("#energy-usage").text(t.energyUsage);
     $( "#temperature-up" ).on('click', function() {
         t.up();
-        t.updateUsage;
-        $("#temperature").text(t.temperature);
-        $("#energy-usage").text(t.energyUsage);
+        update()
     });
     $( "#temperature-down" ).on('click', function() {
         t.down();
-        t.updateUsage;
-        $("#temperature").text(t.temperature);
-        $("#energy-usage").text(t.energyUsage);
+        update()
     });
     $( "#temperature-reset" ).on('click', function() {
         t.reset();
-        t.updateUsage;
-        $("#temperature").text(t.temperature);
-        $("#energy-usage").text(t.energyUsage);
+        update()
     });
     $( "#powersaving-switch" ).on('click', function() {
         t.powerSavingSwitch();
